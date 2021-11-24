@@ -1,9 +1,0 @@
-com\desticube\commands\BalTopCommand.class
-com\desticube\commands\SeenCommand.class
-com\desticube\DestiMain.class
-com\desticube\commands\GamemodeCommand.class
-com\desticube\commands\TestCommand.class
-com\desticube\commands\EcoCommand.class
-com\desticube\commands\PayCommand.class
-com\desticube\listeners\TestListener.class
-com\desticube\commands\MoneyCommand.class
