@@ -1,0 +1,6 @@
+name: DestiAPI
+main: com.desticube.API
+version: 0.0.1-beta
+description: kek
+api-version: 1.17
+depend: [Vault]

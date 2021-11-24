@@ -1,0 +1,6 @@
+name: DestiEssentials
+main: com.desticube.DestiMain
+version: ${project.version}
+description: kek
+api-version: 1.17
+depend: [DestiAPI]

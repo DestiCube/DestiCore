@@ -1,0 +1,79 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                   Essentials                         | #
+# +------------------------------------------------------+ #   
+############################################################
+TeleportWarmup: 5 #in seconds
+BroadcastFormat: '&7[&c&lDestiCube&7] &7%message%'
+NearRadius: 100.5
+JumpDistance: 100
+SocialSpyFormat: "&8[&6&lSOCIALSPY] %player% -> %target%: %message%"
+MessageSentFormat: "&8[&6&lPRIVATE] &7to &6%player%&f: %message%"
+MessageRecievedFormat: "&8[&6&lPRIVATE] &7from &6%player%&f: %message%"
+TPASentFormat:
+  - "&7[&c&l!&7] Request sent to %player%"
+  - "&7[&c&l!&7] To cancel this request, type &c/tpacancel"
+TPAAcceptedFormat:
+  - "&7[&c&l!&7] %player% accepted your teleport request"
+  - "&7[&c&l!&7] Teleporting to %player%"
+TPARecievedFormat:
+  - "&7[&c&l!&7] %player% has requested to teleport to you"
+  - "&8 > &7To teleport, type /tpaccept"
+  - "&8 > &7To deny this request, type /tpdeny"
+  - "&8 > &7This request will timeout after &c120 seconds"
+TPAHereRecievedFormat:
+  - "&7[&c&l!&7] %player% has requested to teleport to them"
+  - "&8 > &7To teleport, type /tpaccept"
+  - "&8 > &7To deny this request, type /tpdeny"
+  - "&8 > &7This request will timeout after &c120 seconds"
+ItemDBFormat:
+  - "&7[&c&l!&7] Item: &c%name%"
+  - "&7[&c&l!&7] Item short names: %shortnames%"
+ItemDBFormatForTool:
+  - "&7[&c&l!&7] Item: &c%name%"
+  - "&7[&c&l!&7] This tool has &c%uses% uses left."
+  - "&7[&c&l!&7] Item short names: &f%shortnames%"
+ListFormat:
+  - "&7[&c&l!&7] There are &c%total% out of maximum &c100 players online."
+  - "&7[&c&l!&7] Staff [%staff_amount%]: %staff%"
+  - "&7[&c&l!&7] Donators [%donators_amount%]: %donators%"
+  - "&7[&c&l!&7] Default [%default_amount%]: %default%"
+ListRankPlaceHolders:
+  staff:
+    - 'admin'
+    - 'owner'
+    - 'mod'
+  donators:
+    - 'gold'
+    - 'diamond'
+  default:
+    - 'member'
+    - 'rank2'
+HomeAmounts: #DEFAULT IS USED FOR ANYONE WHO ISNT OPPED OR HAS NO OTHER PERM
+  default: 1
+  admin: 10
+  donator: 3
+PlayerMySQL: # I still use SQL if you dont set this up
+  Enabled: false # ONLY ENABLE IF YOU HAVENT TRANSLATED DATA YET
+  AutoReconnect: false
+  Host: 127.0.0.1
+  Database: database
+  Username: DestiAPI
+  Password: '12345'
+  Port: 3306
+  
+############################################################
+# +------------------------------------------------------+ #
+# |                   Economy                            | #
+# +------------------------------------------------------+ #
+############################################################
+Settings:
+  DefaultMoney: 300
+EconomyMySQL: # I still use SQL if you dont set this up
+  Enabled: false # ONLY ENABLE IF YOU HAVENT TRANSLATED DATA YET
+  AutoReconnect: false
+  Host: 127.0.0.1
+  Database: database
+  Username: DestiAPI
+  Password: '12345'
+  Port: 3306

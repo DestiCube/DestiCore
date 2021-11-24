@@ -1,0 +1,23 @@
+customtext:
+  website:
+    - " "
+    - "&c&lWebsite&c: &7desticube.com"
+    - " "
+  store:
+    - " "
+    - "&e&lStore&e: &7store.desticube.com"
+    - " "
+  discord:
+    - " "
+    - "&b&lDiscord&b: &7discord.gg/RdbeeRZj9U"
+    - " "
+  maps:
+    - " "
+    - "&7Guide to view the Server Map:"
+    - "&8» &7Download &aLiveKit &7App &8(&7IOS or Android&8)"
+    - "&8» &7Open the App and click on &a+ Connect to Server"
+    - "&8» &7Enter &amap.desticube.com &8(&7Host&8) &7and &a27121 &8(&7Port&8)"
+    - "&8» &7Tap on &aJoin &7and use &a/livekit claim &7In-Game"
+    - " "
+  playtime:
+    - "&7[&c&l!&7] &7To check your playtime, use the command &c/statistics"
