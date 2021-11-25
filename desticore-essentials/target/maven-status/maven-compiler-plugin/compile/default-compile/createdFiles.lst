@@ -38,6 +38,7 @@ com\desticube\commands\TpacceptCommand.class
 com\desticube\commands\HomeCommand.class
 com\desticube\commands\ListCommand.class
 com\desticube\commands\SetSpawnCommand.class
+com\desticube\DestiMain$1.class
 com\desticube\commands\JumpCommand.class
 com\desticube\commands\BackCommand.class
 com\desticube\commands\CondenseCommand.class

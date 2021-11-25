@@ -1,9 +1,11 @@
 package com.desticube;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 
-import com.desticube.handlers.ListenerHandler;
 import com.desticube.handlers.CommandHandler;
+import com.desticube.handlers.ListenerHandler;
 import com.desticube.objects.DestiServer;
 
 public class DestiMain extends JavaPlugin {
@@ -16,8 +18,15 @@ public class DestiMain extends JavaPlugin {
 		instance = this;
 		api = API.a();
 		server = api.server();
-		cmdhandler = new CommandHandler(this, this, "DestiEssentials", "com.desticube.commands");
-		ListenerHandler.a().setup(this, "com.desticube.listeners");
+		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+        scheduler.scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+        		cmdhandler = new CommandHandler(instance, instance, "DestiEssentials", "com.desticube.commands");
+        		ListenerHandler.a().setup(instance, "com.desticube.listeners");
+            }
+        }, 60);
+
 	}
 	
 	@Override

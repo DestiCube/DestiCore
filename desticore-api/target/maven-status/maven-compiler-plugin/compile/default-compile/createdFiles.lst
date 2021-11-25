@@ -7,6 +7,7 @@ com\desticube\timers\TpaHereRequestRemove.class
 com\desticube\configs\ConfigYAML.class
 com\desticube\objects\DestiPlayer.class
 com\desticube\storage\PlayerData.class
+com\desticube\objects\DestiPlayerWarp.class
 com\desticube\economy\EconomyHandler.class
 com\desticube\API.class
 com\desticube\timers\TpaLocalTimer.class

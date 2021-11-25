@@ -58,6 +58,7 @@ public class CommandHandler {
 		    		}
 		    	}
 		    }
+		    scanResult.close();
 		}
 		main.getLogger().info("Finished loading commands");
 		return;
