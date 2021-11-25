@@ -27,7 +27,7 @@ public class WarpCommand extends AbstractCommand implements Defaults {
 		if (!p.hasPermission("desticore.warp")) return p.sendMessage(msg.GENERAL_NO_PERMISSIONS);
 		if (args.length < 1) {
 			StringBuilder builder = new StringBuilder();
-			for (String warpname : getDestiServer().warpList()) {
+			for (String warpname : getDestiServer().warpListAsString()) {
 				builder.append(warpname + ", ");
 			}
 			return p.sendMessage(msg.GENERAL_WARP_LIST.replaceAll("%warps%", builder.toString()));
@@ -43,7 +43,7 @@ public class WarpCommand extends AbstractCommand implements Defaults {
 			String[] args) {
 		if (args.length == 1) {
 			ArrayList<String> names = new ArrayList<String>();
-			getDestiServer().warpList().forEach(s -> names.add(s));
+			getDestiServer().warpListAsString().forEach(s -> names.add(s));
 			return names;
 		} else {
 			return null;

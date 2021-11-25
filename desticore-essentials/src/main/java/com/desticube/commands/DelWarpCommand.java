@@ -24,7 +24,7 @@ public class DelWarpCommand extends AbstractCommand implements Defaults {
 		if (!p.hasPermission("desticore.delwarp")) return p.sendMessage(msg.GENERAL_NO_PERMISSIONS);
 		if (args.length < 1) {
 				StringBuilder builder = new StringBuilder();
-				for (String warp : getDestiServer().warpList()) builder.append(warp + ", ");
+				for (String warp : getDestiServer().warpListAsString()) builder.append(warp + ", ");
 				return p.sendMessage(msg.GENERAL_WARP_LIST.replaceAll("%warps%", builder.toString()));
 			
 		} else if (args.length >= 1) {

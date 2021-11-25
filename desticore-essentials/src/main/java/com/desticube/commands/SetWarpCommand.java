@@ -25,7 +25,7 @@ public class SetWarpCommand extends AbstractCommand implements Defaults {
 		if (args.length < 1) {
 			p.sendMessage("&cCorrect usage: /setwarp (name)");
 		} else if (args.length >= 1) {
-			getDestiServer().setWarp(args[0], p.getLocation());
+			getDestiServer().setWarp(args[0], p.getLocation(), p.getItemInMainHand());
 			p.sendMessage(msg.GENERAL_WARP_SET.replaceAll("%name%", args[0]));
 		}
 		return false;
