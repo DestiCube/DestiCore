@@ -39,7 +39,7 @@
 	</dependency>
 	<dependency>
 	  <groupId>com.craftbukkit</groupId>
-	  <artifactId>1_17_R1</artifactId>
+	  <artifactId>1_16_R1</artifactId>
 	  <version>0</version>
 	  <scope>provided</scope>
 	</dependency>

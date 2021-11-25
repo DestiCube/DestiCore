@@ -32,6 +32,7 @@ public class DestiServer implements Listener {
 	static HashMap<Player, DestiPlayer> onlineplayers;
 	static Location spawn;
 	ArrayList<DestiWarp> warps;
+	ArrayList<DestiPlayerWarp> playerwarps;
 	ConfigYAML configs = ConfigYAML.a();
 	ArrayList<DestiKit> kits;
 	public DestiServer(Server server, Plugin pl) {
@@ -39,6 +40,7 @@ public class DestiServer implements Listener {
 		server.getPluginManager().registerEvents(this, pl);
 		onlineplayers = new HashMap<Player, DestiPlayer>();
 		warps = new ArrayList<DestiWarp>();
+		playerwarps = new ArrayList<DestiPlayerWarp>();
 		kits = new ArrayList<DestiKit>();
 		cmds = new HashMap<Command, String>();
 		spawn = null;
@@ -58,7 +60,21 @@ public class DestiServer implements Listener {
 						configs.getLocations().getLong("Warps." + name + ".z"),
 						configs.getLocations().getLong("Warps." + name + ".yaw"),
 						configs.getLocations().getLong("Warps." + name + ".pitch"));
-				warps.add(new DestiWarp(name, loc));
+				ItemStack displayItem = itemStackFromBase64(configs.getLocations().getString("Warps." + name + ".displayitem"));
+				warps.add(new DestiWarp(name, loc, displayItem));
+			}
+		}
+		if (configs.getLocations().getConfigurationSection("PlayerWarps") != null) {
+			for (String name : configs.getLocations().getConfigurationSection("PlayerWarps").getKeys(false)) {
+				Location loc = new Location(Bukkit.getWorld(configs.getLocations().getString("PlayerWarps." + name + ".world")),
+						configs.getLocations().getLong("PlayerWarps." + name + ".x"),
+						configs.getLocations().getLong("PlayerWarps." + name + ".y"),
+						configs.getLocations().getLong("PlayerWarps." + name + ".z"),
+						configs.getLocations().getLong("PlayerWarps." + name + ".yaw"),
+						configs.getLocations().getLong("PlayerWarps." + name + ".pitch"));
+				ItemStack displayItem = itemStackFromBase64(configs.getLocations().getString("PlayerWarps." + name + ".displayitem"));
+				Player owner = Bukkit.getPlayer(configs.getLocations().getString("PlayerWarps." + name + ".owner"));
+				playerwarps.add(new DestiPlayerWarp(owner, name, loc, displayItem));
 			}
 		}
 		if (configs.getKits().getConfigurationSection("kits") != null) {
@@ -89,6 +105,7 @@ public class DestiServer implements Listener {
 		configs.saveRules();
 		configs.reloadCustomText();
 		configs.saveCustomText();
+		playerwarps = new ArrayList<DestiPlayerWarp>();
 		warps = new ArrayList<DestiWarp>();
 		kits = new ArrayList<DestiKit>();
 		if (configs.getLocations().getString("SpawnLocation.world") != null) {
@@ -107,7 +124,22 @@ public class DestiServer implements Listener {
 						configs.getLocations().getLong("Warps." + name + ".z"),
 						configs.getLocations().getLong("Warps." + name + ".yaw"),
 						configs.getLocations().getLong("Warps." + name + ".pitch"));
-				warps.add(new DestiWarp(name, loc));
+				ItemStack displayItem = itemStackFromBase64(configs.getLocations().getString("Warps." + name + ".displayitem"));
+				warps.add(new DestiWarp(name, loc, displayItem));
+			}
+		}
+
+		if (configs.getLocations().getConfigurationSection("PlayerWarps") != null) {
+			for (String name : configs.getLocations().getConfigurationSection("PlayerWarps").getKeys(false)) {
+				Location loc = new Location(Bukkit.getWorld(configs.getLocations().getString("PlayerWarps." + name + ".world")),
+						configs.getLocations().getLong("PlayerWarps." + name + ".x"),
+						configs.getLocations().getLong("PlayerWarps." + name + ".y"),
+						configs.getLocations().getLong("PlayerWarps." + name + ".z"),
+						configs.getLocations().getLong("PlayerWarps." + name + ".yaw"),
+						configs.getLocations().getLong("PlayerWarps." + name + ".pitch"));
+				ItemStack displayItem = itemStackFromBase64(configs.getLocations().getString("PlayerWarps." + name + ".displayitem"));
+				Player owner = Bukkit.getPlayer(configs.getLocations().getString("PlayerWarps." + name + ".owner"));
+				playerwarps.add(new DestiPlayerWarp(owner, name, loc, displayItem));
 			}
 		}
 	}
@@ -184,13 +216,14 @@ public class DestiServer implements Listener {
 		spawn = loc;
 	}
 	public Location getSpawn() {return spawn;}
-	public void setWarp(String name, Location loc) {
+	public void setWarp(String name, Location loc, ItemStack displayItem) {
 		String world = loc.getWorld().getName();
 		int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
 		float yaw = loc.getYaw();
 		float pitch = loc.getPitch();
+		configs.getLocations().set("Warps." + name + ".displayitem", itemStackToBase64(displayItem));
 		configs.getLocations().set("Warps." + name + ".world", world);
 		configs.getLocations().set("Warps." + name + ".x", x);
 		configs.getLocations().set("Warps." + name + ".y", y);
@@ -199,7 +232,7 @@ public class DestiServer implements Listener {
 		configs.getLocations().set("Warps." + name + ".pitch", pitch);
 		configs.saveLocations();
 		configs.reloadLocations();
-		warps.add(new DestiWarp(name, loc));
+		warps.add(new DestiWarp(name, loc, displayItem));
 	}
 	public boolean delWarp(DestiWarp warp) {
 		if (warps.contains(warp)) {
@@ -210,7 +243,10 @@ public class DestiServer implements Listener {
 			return warps.contains(warp);
 		} else return false;
 	}
-	public ArrayList<String> warpList() {
+	public ArrayList<DestiWarp> warpList() {
+		return warps;
+	}
+	public ArrayList<String> warpListAsString() {
 		ArrayList<String> warplist = new ArrayList<String>();
 		warps.forEach(s -> warplist.add(s.getName()));
 		return warplist;
@@ -234,6 +270,66 @@ public class DestiServer implements Listener {
 			}
 		});
 		return warpget;
+	}
+	
+	
+	
+	
+	public void setPlayerWarp(Player owner, String name, Location loc, ItemStack displayItem) {
+		String world = loc.getWorld().getName();
+		int x = loc.getBlockX();
+		int y = loc.getBlockY();
+		int z = loc.getBlockZ();
+		float yaw = loc.getYaw();
+		float pitch = loc.getPitch();
+		configs.getLocations().set("PlayerWarps." + name + ".owner", owner.getUniqueId());
+		configs.getLocations().set("PlayerWarps." + name + ".displayitem", itemStackToBase64(displayItem));
+		configs.getLocations().set("PlayerWarps." + name + ".world", world);
+		configs.getLocations().set("PlayerWarps." + name + ".x", x);
+		configs.getLocations().set("PlayerWarps." + name + ".y", y);
+		configs.getLocations().set("PlayerWarps." + name + ".z", z);
+		configs.getLocations().set("PlayerWarps." + name + ".yaw", yaw);
+		configs.getLocations().set("PlayerWarps." + name + ".pitch", pitch);
+		configs.saveLocations();
+		configs.reloadLocations();
+		playerwarps.add(new DestiPlayerWarp(owner, name, loc, displayItem));
+	}
+	public boolean delPlayerWarp(DestiPlayerWarp warp) {
+		if (playerwarps.contains(warp)) {
+			configs.getLocations().set("PlayerWarps." + warp.getName(), null);
+			configs.saveLocations();
+			configs.reloadLocations();
+			playerwarps.remove(warp);
+			return playerwarps.contains(warp);
+		} else return false;
+	}
+	public ArrayList<DestiPlayerWarp> playerWarpList() {
+		return playerwarps;
+	}
+	public ArrayList<String> playerWarpListAsString() {
+		ArrayList<String> warplist = new ArrayList<String>();
+		playerwarps.forEach(s -> warplist.add(s.getName()));
+		return warplist;
+	}
+	boolean playerwarpexists;
+	public boolean playerWarpExists(String name) {
+		playerwarpexists = false;
+		playerwarps.forEach(warp -> {
+			if (warp.getName().equalsIgnoreCase(name)) {
+				playerwarpexists = true;
+			}
+		});
+		return playerwarpexists;
+	}
+	DestiPlayerWarp playerwarpget;
+	public DestiPlayerWarp getPlayerWarp(String name) {
+		playerwarpget = null;
+		playerwarps.forEach(warp -> {
+			if (warp.getName().equalsIgnoreCase(name)) {
+				playerwarpget = warp;
+			}
+		});
+		return playerwarpget;
 	}
 	
 	
@@ -357,6 +453,44 @@ public class DestiServer implements Listener {
 	            
 	            dataInput.close();
 	            return items;
+	        } catch (ClassNotFoundException | IOException e) {
+	            e.printStackTrace();
+	        }
+			return null;
+	    }
+	     
+	    private String itemStackToBase64(ItemStack item) {
+	    	try {
+	            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+	            BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
+	            
+//	            // Write the size of the inventory
+//	            dataOutput.writeInt(items.length);
+	            
+	            // Save every element in the list
+	            dataOutput.writeObject(item);
+	            
+	            // Serialize that array
+	            dataOutput.close();
+	            return Base64Coder.encodeLines(outputStream.toByteArray());
+	        } catch (Exception e) {
+	            throw new IllegalStateException("Unable to save item stacks.", e);
+	        }
+	    }
+
+	    private ItemStack itemStackFromBase64(String data) {
+	    	try {
+	            ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
+	            BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+	            ItemStack[] items = new ItemStack[dataInput.readInt()];
+	    
+	            // Read the serialized inventory
+	            for (int i = 0; i < items.length; i++) {
+	            	items[i] = (ItemStack) dataInput.readObject();
+	            }
+	            
+	            dataInput.close();
+	            return items[0];
 	        } catch (ClassNotFoundException | IOException e) {
 	            e.printStackTrace();
 	        }
