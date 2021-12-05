@@ -10,6 +10,7 @@ JumpDistance: 100
 SocialSpyFormat: "&8[&6&lSOCIALSPY] %player% -> %target%: %message%"
 MessageSentFormat: "&8[&6&lPRIVATE] &7to &6%player%&f: %message%"
 MessageRecievedFormat: "&8[&6&lPRIVATE] &7from &6%player%&f: %message%"
+PlayerWarpCost: 999.99
 TPASentFormat:
   - "&7[&c&l!&7] Request sent to %player%"
   - "&7[&c&l!&7] To cancel this request, type &c/tpacancel"
@@ -53,6 +54,23 @@ HomeAmounts: #DEFAULT IS USED FOR ANYONE WHO ISNT OPPED OR HAS NO OTHER PERM
   default: 1
   admin: 10
   donator: 3
+WarpMenu:
+  Title: "&#40E238Warp Menu"
+  Size: 9
+  Items:
+    '4':
+      Material: "DIAMOND_BLOCK"
+      DisplayName: "&#40E238Server Warps"
+      Lore:
+      - "&#40E238This will bring you to the menu for the server warps"
+      Destination: "SERVER"
+    '6':
+      Material: "GOLD_BLOCK"
+      DisplayName: "&#40E238Player Warps"
+      Lore:
+      - "&#40E238This will bring you to the menu for the player warps"
+      Destination: "PLAYER"
+    
 PlayerMySQL: # I still use SQL if you dont set this up
   Enabled: false # ONLY ENABLE IF YOU HAVENT TRANSLATED DATA YET
   AutoReconnect: false

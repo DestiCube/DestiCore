@@ -18,14 +18,9 @@ public class DestiMain extends JavaPlugin {
 		instance = this;
 		api = API.a();
 		server = api.server();
-		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-        scheduler.scheduleSyncDelayedTask(this, new Runnable() {
-            @Override
-            public void run() {
-        		cmdhandler = new CommandHandler(instance, instance, "DestiEssentials", "com.desticube.commands");
-        		ListenerHandler.a().setup(instance, "com.desticube.listeners");
-            }
-        }, 60);
+        		cmdhandler = new CommandHandler(this, "DestiEssentials", "com.desticube.commands");
+        		cmdhandler.startup();
+        		ListenerHandler.a().setup(this, "com.desticube.listeners");
 
 	}
 	

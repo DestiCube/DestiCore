@@ -7,17 +7,17 @@
   </parent>
   <artifactId>desticore-essentials</artifactId>
   <dependencies>
-    <dependency>
-           <groupId>org.spigotmc</groupId>
-           <artifactId>spigot-api</artifactId>
-           <version>1.17.1-R0.1-SNAPSHOT</version>
-           <scope>provided</scope>
-    </dependency>
 	  <dependency>
 		  <groupId>com.desticube</groupId>
 		  <artifactId>desticore-api</artifactId>
 		  <version>${revision}</version>
           <scope>provided</scope>
+	  </dependency>
+	  <dependency>
+		  <groupId>org.spigotmc</groupId>
+		  <artifactId>spigot-api</artifactId>
+		  <version>1.18-R0.1-SNAPSHOT</version>
+		  <scope>provided</scope>
 	  </dependency>
     <dependency>
         <groupId>com.github.MilkBowl</groupId>

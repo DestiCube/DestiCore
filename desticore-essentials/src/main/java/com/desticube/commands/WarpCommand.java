@@ -26,11 +26,12 @@ public class WarpCommand extends AbstractCommand implements Defaults {
 		DestiPlayer p = getDestiPlayer((Player) sender);
 		if (!p.hasPermission("desticore.warp")) return p.sendMessage(msg.GENERAL_NO_PERMISSIONS);
 		if (args.length < 1) {
-			StringBuilder builder = new StringBuilder();
-			for (String warpname : getDestiServer().warpListAsString()) {
-				builder.append(warpname + ", ");
-			}
-			return p.sendMessage(msg.GENERAL_WARP_LIST.replaceAll("%warps%", builder.toString()));
+			getDestiServer().openWarpMenuGUI(p);
+//			StringBuilder builder = new StringBuilder();
+//			for (String warpname : getDestiServer().warpListAsString()) {
+//				builder.append(warpname + ", ");
+//			}
+//			return p.sendMessage(msg.GENERAL_WARP_LIST.replaceAll("%warps%", builder.toString()));
 		} else if (args.length >= 1) {
 			if (!getDestiServer().warpExists(args[0])) return p.sendMessage(msg.GENERAL_WARP_NOT_SET.replaceAll("%name%", args[0]));
 			p.teleport(getDestiServer().getWarp(args[0]).getLocation());

@@ -6,6 +6,7 @@ C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\jav
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\objects\DestiWarp.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\timers\TeleportWarmup.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\handlers\CommandHandler.java
+C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\objects\Page.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\annotations\Listener.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\timers\TpaRequestRemove.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\handlers\ListenerHandler.java
@@ -22,6 +23,7 @@ C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\jav
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\objects\CustomText.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\configs\config.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\storage\PlayerData.java
+C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\objects\DestiItem.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\API.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\storage\Database.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-api\src\main\java\com\desticube\economy\account\Accounts.java

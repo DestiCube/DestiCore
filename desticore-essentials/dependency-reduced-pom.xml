@@ -6,7 +6,7 @@
     <version>${revision}</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>desticore-api</artifactId>
+  <artifactId>desticore-essentials</artifactId>
   <build>
     <resources>
       <resource>
@@ -14,22 +14,11 @@
         <directory>src/main/resources</directory>
         <includes>
           <include>plugin.yml</include>
-          <include>config.yml</include>
-          <include>messages.yml</include>
-          <include>locations.yml</include>
-          <include>rules.yml</include>
-          <include>kits.yml</include>
-          <include>customtext.yml</include>
-          <include>wiki/wiki.html</include>
         </includes>
       </resource>
     </resources>
-    <finalName>DestiAPI-${revision}</finalName>
+    <finalName>DestiEssentials-${revision}</finalName>
     <plugins>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.0</version>
-      </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.2.1</version>
@@ -39,14 +28,6 @@
             <goals>
               <goal>shade</goal>
             </goals>
-            <configuration>
-              <relocations>
-                <relocation>
-                  <pattern>io.github.classgraph</pattern>
-                  <shadedPattern>com.rpg.classgraph</shadedPattern>
-                </relocation>
-              </relocations>
-            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -60,6 +41,22 @@
     </plugins>
   </build>
   <dependencies>
+    <dependency>
+      <groupId>com.desticube</groupId>
+      <artifactId>desticore-api</artifactId>
+      <version>0.0.1-beta</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>ConfigAPI</artifactId>
+          <groupId>com.gamerduck</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-io</artifactId>
+          <groupId>commons-io</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>

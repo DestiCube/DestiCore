@@ -7,12 +7,12 @@
   </parent>
   <artifactId>desticore-anticheat</artifactId>
    <dependencies>
-    <dependency>
-           <groupId>org.spigotmc</groupId>
-           <artifactId>spigot-api</artifactId>
-           <version>1.17.1-R0.1-SNAPSHOT</version>
-           <scope>provided</scope>
-    </dependency>
+	  <dependency>
+		  <groupId>org.spigotmc</groupId>
+		  <artifactId>spigot-api</artifactId>
+		  <version>1.18-R0.1-SNAPSHOT</version>
+		  <scope>provided</scope>
+	  </dependency>
 	  <dependency>
 		  <groupId>com.desticube</groupId>
 		  <artifactId>desticore-api</artifactId>
@@ -50,7 +50,7 @@
 	      <artifactId>maven-jar-plugin</artifactId>
 	      <version>2.3.1</version>
 	      <configuration>
-	        <outputDirectory>C:\Users\gtpal\Desktop\server\plugins</outputDirectory>
+	        <outputDirectory>C:\Users\gtpal\Desktop\</outputDirectory>
 	      </configuration>
     </plugin>
     </plugins>

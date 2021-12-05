@@ -10,7 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.desticube.configs.ConfigYAML;
 import com.desticube.configs.msg;
 import com.desticube.economy.EconomyHandler;
-import com.desticube.handlers.CommandHandler;
 import com.desticube.handlers.VaultHandler;
 import com.desticube.objects.DestiServer;
 import com.desticube.storage.PlayerDB;
@@ -42,6 +41,7 @@ public class API extends JavaPlugin {
 		TpaRequestRemove.a().setup(this);
 		PlayerData.a().setup(this);
 		TPSTimer.a().startTPSTimer();
+		
 		Bukkit.getScheduler().scheduleAsyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {

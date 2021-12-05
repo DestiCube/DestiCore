@@ -19,7 +19,7 @@ public class ListenerHandler {
 	
 	public boolean setup(Plugin plug, String pkg) {
 		this.plug = plug;
-		
+	
 		String routeAnnotation = "com.desticube.annotations.Listener";
 		try (ScanResult scanResult =
 		        new ClassGraph()

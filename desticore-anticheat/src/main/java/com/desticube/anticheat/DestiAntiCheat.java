@@ -17,7 +17,8 @@ public class DestiAntiCheat extends JavaPlugin {
 		instance = this;
 		api = API.a();
 		server = api.server();
-		cmdhandler = new CommandHandler(this, this, "DestiAntiCheat", "com.desticube.anticheat.commands");
+		cmdhandler = new CommandHandler(this, "DestiAntiCheat", "com.desticube.anticheat.commands");
+		cmdhandler.startup();
 		ListenerHandler.a().setup(this, "com.desticube.listeners");
 	}
 	

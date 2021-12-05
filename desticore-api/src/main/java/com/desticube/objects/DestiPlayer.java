@@ -15,23 +15,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
 import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
-import org.bukkit.inventory.meta.tags.ItemTagType;
 import org.bukkit.permissions.Permission;
 import org.bukkit.util.Vector;
 
@@ -46,7 +42,7 @@ import com.desticube.timers.TeleportWarmup;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 
-public class DestiPlayer {
+public class DestiPlayer implements InventoryHolder {
 	Player p;
 	UUID uuid;
 	LocalDateTime logintime;
@@ -353,43 +349,26 @@ public class DestiPlayer {
 
         }
 
-    public void openPlayerWarpGUI() { 
-    	Inventory inv = Bukkit.createInventory(null, 54, "Server Warps");
-    	for (DestiWarp warp : API.a().server().warpList()) {
-    		ItemStack i = warp.getDisplayItem().clone();
-    		ItemMeta im = i.getItemMeta();
-    		NamespacedKey key = new NamespacedKey(API.a(), "playerwarps");
-    		im.getCustomTagContainer().setCustomTag(key, ItemTagType.STRING, warp.getName());
-    		i.setItemMeta(im);
-    		inv.addItem(i);
-    	}
-    	p.openInventory(inv);
-    }
 
-    public void openServerWarpGUI() { 
-    	Inventory inv = Bukkit.createInventory(null, 54, "Server Warps");
-    	for (DestiWarp warp : API.a().server().warpList()) {
-    		ItemStack i = warp.getDisplayItem().clone();
-    		ItemMeta im = i.getItemMeta();
-    		NamespacedKey key = new NamespacedKey(API.a(), "warps");
-    		im.getCustomTagContainer().setCustomTag(key, ItemTagType.STRING, warp.getName());
-    		i.setItemMeta(im);
-    		inv.addItem(i);
-    	}
-    	p.openInventory(inv);
-    }
-    
-    @EventHandler
-    public void onClick(InventoryClickEvent e) {
-    	if (e.getView().getTitle().equalsIgnoreCase("Server Warps")) {
-    		NamespacedKey key = new NamespacedKey(API.a(), "warps");
-    		ItemStack i = e.getCurrentItem();
-    		ItemMeta im = i.getItemMeta();
-    		CustomItemTagContainer ctc = im.getCustomTagContainer();
-    		teleport(API.a().server().getWarp(ctc.getCustomTag(key, ItemTagType.STRING)).getLocation());
+    private String color(String message, boolean hex) {
+    	if (hex == true) {
+	    	char COLOR_CHAR = ChatColor.COLOR_CHAR;
+	    	Pattern HEX_PATTERN = Pattern.compile("&(#[A-Fa-f0-9]{6})");
+	        Matcher matcher = HEX_PATTERN.matcher(message);
+	        StringBuffer buffer = new StringBuffer(message.length() + 4 * 8);
+	        while (matcher.find()) {
+	            String group = matcher.group(1);
+	            matcher.appendReplacement(buffer, COLOR_CHAR + "x"
+	                    + COLOR_CHAR + group.charAt(0) + COLOR_CHAR + group.charAt(1)
+	                    + COLOR_CHAR + group.charAt(2) + COLOR_CHAR + group.charAt(3)
+	                    + COLOR_CHAR + group.charAt(4) + COLOR_CHAR + group.charAt(5)
+	            );
+	        }
+	        return matcher.appendTail(buffer).toString();
+    	} else {
+    		return ChatColor.translateAlternateColorCodes('&', message);
     	}
     }
-    
 //	//DEFAULT BUKKIT PLAYER THINGS
 //    public String getDisplayName() {return p.getDisplayName();}
 //    public void setDisplayName(String name) {p.setDisplayName(name);}

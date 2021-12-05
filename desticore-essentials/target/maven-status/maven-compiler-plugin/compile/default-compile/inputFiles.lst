@@ -55,6 +55,7 @@ C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\m
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\BalTopCommand.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\TpposCommand.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\ItemDBCommand.java
+C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\SetPlayerWarpCommand.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\BackCommand.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\SuicideCommand.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\GodCommand.java
@@ -62,6 +63,7 @@ C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\m
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\DestiMain.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\HatCommand.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\RepairCommand.java
+C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\DelPlayerWarpCommand.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\WorkBenchCommand.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\HomeCommand.java
 C:\Users\gtpal\Desktop\DestiCore 2.0\desticore-parent\desticore-essentials\src\main\java\com\desticube\commands\RulesCommand.java

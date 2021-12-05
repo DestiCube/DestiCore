@@ -10,7 +10,7 @@
 	  <dependency>
 		  <groupId>org.spigotmc</groupId>
 		  <artifactId>spigot-api</artifactId>
-		  <version>1.17.1-R0.1-SNAPSHOT</version>
+		  <version>1.18-R0.1-SNAPSHOT</version>
 		  <scope>provided</scope>
 	  </dependency>
     <dependency>
@@ -31,17 +31,10 @@
 	    <version>4.8.122</version>
 	    <scope>compile</scope>
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 	<dependency>
 	    <groupId>commons-io</groupId>
 	    <artifactId>commons-io</artifactId>
 	    <version>2.11.0</version>
-	</dependency>
-	<dependency>
-	  <groupId>com.craftbukkit</groupId>
-	  <artifactId>1_16_R1</artifactId>
-	  <version>0</version>
-	  <scope>provided</scope>
 	</dependency>
   </dependencies>	
   <build>
