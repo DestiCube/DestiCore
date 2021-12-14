@@ -1,9 +1,18 @@
 package com.desticube;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Set;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitScheduler;
+import org.reflections.Reflections;
 
+import com.desticube.annotations.Command;
 import com.desticube.handlers.CommandHandler;
 import com.desticube.handlers.ListenerHandler;
 import com.desticube.objects.DestiServer;
@@ -18,10 +27,9 @@ public class DestiMain extends JavaPlugin {
 		instance = this;
 		api = API.a();
 		server = api.server();
-        		cmdhandler = new CommandHandler(this, "DestiEssentials", "com.desticube.commands");
-        		cmdhandler.startup();
-        		ListenerHandler.a().setup(this, "com.desticube.listeners");
-
+        cmdhandler = new CommandHandler(this, "DestiEssentials", getClasses("com.desticube.commands"));
+        cmdhandler.startup();
+        ListenerHandler.a().setup(this, getClasses("com.desticube.listeners"));
 	}
 	
 	@Override
@@ -32,6 +40,11 @@ public class DestiMain extends JavaPlugin {
 	public DestiServer server() {return server;}
 	public API api() {return api;}
 
+	private Set<Class<?>> getClasses(String pkg) {
+		Reflections reflections = new Reflections(pkg);
+		Set<Class<? extends Object>> allClasses = reflections.getTypesAnnotatedWith(Command.class);
+		return allClasses;
+	}
 	   
 //	   private boolean translateFromEssentials() {
 //		   long startTime = System.currentTimeMillis();

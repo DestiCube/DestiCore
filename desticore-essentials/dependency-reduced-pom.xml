@@ -28,6 +28,17 @@
             <goals>
               <goal>shade</goal>
             </goals>
+            <configuration>
+              <relocations>
+                <relocation>
+                  <pattern>org.reflections.Reflections</pattern>
+                  <shadedPattern>com.desticube.reflections.Reflections</shadedPattern>
+                  <includes>
+                    <include>org.reflections.Reflections</include>
+                  </includes>
+                </relocation>
+              </relocations>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -51,10 +62,6 @@
           <artifactId>ConfigAPI</artifactId>
           <groupId>com.gamerduck</groupId>
         </exclusion>
-        <exclusion>
-          <artifactId>commons-io</artifactId>
-          <groupId>commons-io</groupId>
-        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -66,10 +73,6 @@
         <exclusion>
           <artifactId>commons-lang</artifactId>
           <groupId>commons-lang</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>guava</artifactId>
-          <groupId>com.google.guava</groupId>
         </exclusion>
         <exclusion>
           <artifactId>gson</artifactId>

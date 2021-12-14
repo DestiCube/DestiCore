@@ -49,8 +49,6 @@ public class KitCommand extends AbstractCommand implements Defaults {
 			p.sendMessage("Given kit: " + args[0]);
 			LocalDateTime time = LocalDateTime.now();
 			p.setKitUsed(getDestiServer().getKit(args[0]), time);
-			p.sendMessage(args[0] + " used at " + time.getMonthValue() + "month, " + time.getDayOfMonth() + "day, " 
-			+ time.getHour() + "hour, " + time.getMinute() + "minute, "  + time.getSecond() + "second, "); 
 		}
 		return false;
 	}

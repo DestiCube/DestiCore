@@ -33,6 +33,7 @@ com\desticube\objects\AbstractCommand.class
 com\desticube\objects\CustomText.class
 com\desticube\objects\DestiServer$7.class
 com\desticube\objects\DestiServer.class
+com\desticube\PAPIExpansion.class
 com\desticube\storage\PlayerDB.class
 com\desticube\timers\TpaRequestRemove.class
 com\desticube\economy\account\Account.class

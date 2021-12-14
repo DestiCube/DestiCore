@@ -10,6 +10,7 @@ JumpDistance: 100
 SocialSpyFormat: "&8[&6&lSOCIALSPY] %player% -> %target%: %message%"
 MessageSentFormat: "&8[&6&lPRIVATE] &7to &6%player%&f: %message%"
 MessageRecievedFormat: "&8[&6&lPRIVATE] &7from &6%player%&f: %message%"
+StarterKit: "starter"
 PlayerWarpCost: 999.99
 TPASentFormat:
   - "&7[&c&l!&7] Request sent to %player%"

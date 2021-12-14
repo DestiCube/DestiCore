@@ -3,6 +3,7 @@ package com.desticube.listeners;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,14 +34,20 @@ public class PlayerListener implements IListener, Defaults {
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
+		if (!e.getPlayer().hasPlayedBefore()) {
+			for (ItemStack item : getDestiServer().getKit(config.STARTERKIT).getItems()) {
+				if (item == null || item.getType() == Material.AIR) { continue; }
+				getDestiPlayer(e.getPlayer()).getInventory().addItem(item);
+			}
+			LocalDateTime time = LocalDateTime.now();
+			getDestiPlayer(e.getPlayer()).setKitUsed(getDestiServer().getKit(config.STARTERKIT), time);
+		}
 		e.getPlayer().setDisplayName(color(getDestiPlayer(e.getPlayer()).getNickName() + "&r"));
 		for (DestiKit kit : getDestiPlayer(e.getPlayer()).getUsedKits()) {
 			LocalDateTime time = getDestiPlayer(e.getPlayer()).getTimeSinceKitUsed(kit);
 			e.getPlayer().sendMessage(kit.getName() + " used at " + time.getMonthValue() + "month, " + time.getDayOfMonth() + "day, " 
 			+ time.getHour() + "hour, " + time.getMinute() + "minute, "  + time.getSecond() + "second, "); 
 		}
-	}public PlayerListener() {
-		// TODO Auto-generated constructor stub
 	}
 	@EventHandler
 	public void onDeath(PlayerDeathEvent e) {
@@ -87,7 +94,6 @@ public class PlayerListener implements IListener, Defaults {
     		ItemStack i = e.getCurrentItem();
     		ItemMeta im = i.getItemMeta();
     		CustomItemTagContainer ctc = im.getCustomTagContainer();
-    		e.getWhoClicked().sendMessage(ctc.getCustomTag(key, ItemTagType.STRING));
     		if (ctc.getCustomTag(key, ItemTagType.STRING).equalsIgnoreCase("SERVER")) {
     			getDestiServer().openServerWarpGUI(getDestiPlayer((Player) e.getWhoClicked()), 1);
     		}

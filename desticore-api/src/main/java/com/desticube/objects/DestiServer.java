@@ -63,37 +63,22 @@ public class DestiServer implements Listener {
 		playerwarps = new ArrayList<DestiPlayerWarp>();
 		kits = new ArrayList<DestiKit>();
 		cmds = new HashMap<Command, String>();
-		spawn = null;
+		spawn = new Location(Bukkit.getWorld("Spawn"), 0, 100, 0);
 		playerpages = new ArrayList<Page>();
 		serverpages = new ArrayList<Page>();
-		if (configs.getLocations().getString("SpawnLocation.world") != null) {
-		spawn = new Location(Bukkit.getWorld(configs.getLocations().getString("SpawnLocation.world")),
-				configs.getLocations().getLong("SpawnLocation.x"),
-				configs.getLocations().getLong("SpawnLocation.y"),
-				configs.getLocations().getLong("SpawnLocation.z"),
-				configs.getLocations().getLong("SpawnLocation.yaw"),
-				configs.getLocations().getLong("SpawnLocation.pitch"));
+		if (configs.getLocations().getString("SpawnLocation") != null) {
+			spawn = configs.getLocations().getLocation("SpawnLocation");
 		}
 		if (configs.getLocations().getConfigurationSection("Warps") != null) {
 			for (String name : configs.getLocations().getConfigurationSection("Warps").getKeys(false)) {
-				Location loc = new Location(Bukkit.getWorld(configs.getLocations().getString("Warps." + name + ".world")),
-						configs.getLocations().getLong("Warps." + name + ".x"),
-						configs.getLocations().getLong("Warps." + name + ".y"),
-						configs.getLocations().getLong("Warps." + name + ".z"),
-						configs.getLocations().getLong("Warps." + name + ".yaw"),
-						configs.getLocations().getLong("Warps." + name + ".pitch"));
+				Location loc = configs.getLocations().getLocation("Warps." + name + ".Location");
 				ItemStack[] displayItem = itemStackArrayFromBase64(configs.getLocations().getString("Warps." + name + ".displayitem"));
 				warps.add(new DestiWarp(name, loc, displayItem[0]));
 			}
 		}
 		if (configs.getLocations().getConfigurationSection("PlayerWarps") != null) {
 			for (String name : configs.getLocations().getConfigurationSection("PlayerWarps").getKeys(false)) {
-				Location loc = new Location(Bukkit.getWorld(configs.getLocations().getString("PlayerWarps." + name + ".world")),
-						configs.getLocations().getLong("PlayerWarps." + name + ".x"),
-						configs.getLocations().getLong("PlayerWarps." + name + ".y"),
-						configs.getLocations().getLong("PlayerWarps." + name + ".z"),
-						configs.getLocations().getLong("PlayerWarps." + name + ".yaw"),
-						configs.getLocations().getLong("PlayerWarps." + name + ".pitch"));
+				Location loc = configs.getLocations().getLocation("PlayerWarps." + name + ".Location");
 				ItemStack[] displayItem = itemStackArrayFromBase64(configs.getLocations().getString("PlayerWarps." + name + ".displayitem"));
 				OfflinePlayer owner = Bukkit.getOfflinePlayer(configs.getLocations().getString("PlayerWarps." + name + ".owner"));
 				playerwarps.add(new DestiPlayerWarp(owner, name, loc, displayItem[0]));
@@ -138,22 +123,12 @@ public class DestiServer implements Listener {
 		playerwarps = new ArrayList<DestiPlayerWarp>();
 		warps = new ArrayList<DestiWarp>();
 		kits = new ArrayList<DestiKit>();
-		if (configs.getLocations().getString("SpawnLocation.world") != null) {
-			spawn = new Location(Bukkit.getWorld(configs.getLocations().getString("SpawnLocation.world")),
-					configs.getLocations().getLong("SpawnLocation.x"),
-					configs.getLocations().getLong("SpawnLocation.y"),
-					configs.getLocations().getLong("SpawnLocation.z"),
-					configs.getLocations().getLong("SpawnLocation.yaw"),
-					configs.getLocations().getLong("SpawnLocation.pitch"));
+		if (configs.getLocations().getString("SpawnLocation") != null) {
+			spawn = configs.getLocations().getLocation("SpawnLocation");
 		}
 		if (configs.getLocations().getConfigurationSection("Warps") != null) {
 			for (String name : configs.getLocations().getConfigurationSection("Warps").getKeys(false)) {
-				Location loc = new Location(Bukkit.getWorld(configs.getLocations().getString("Warps." + name + ".world")),
-						configs.getLocations().getLong("Warps." + name + ".x"),
-						configs.getLocations().getLong("Warps." + name + ".y"),
-						configs.getLocations().getLong("Warps." + name + ".z"),
-						configs.getLocations().getLong("Warps." + name + ".yaw"),
-						configs.getLocations().getLong("Warps." + name + ".pitch"));
+				Location loc = configs.getLocations().getLocation("Warps." + name + ".Location");
 				ItemStack[] displayItem = itemStackArrayFromBase64(configs.getLocations().getString("Warps." + name + ".displayitem"));
 				warps.add(new DestiWarp(name, loc, displayItem[0]));
 			}
@@ -161,12 +136,7 @@ public class DestiServer implements Listener {
 
 		if (configs.getLocations().getConfigurationSection("PlayerWarps") != null) {
 			for (String name : configs.getLocations().getConfigurationSection("PlayerWarps").getKeys(false)) {
-				Location loc = new Location(Bukkit.getWorld(configs.getLocations().getString("PlayerWarps." + name + ".world")),
-						configs.getLocations().getLong("PlayerWarps." + name + ".x"),
-						configs.getLocations().getLong("PlayerWarps." + name + ".y"),
-						configs.getLocations().getLong("PlayerWarps." + name + ".z"),
-						configs.getLocations().getLong("PlayerWarps." + name + ".yaw"),
-						configs.getLocations().getLong("PlayerWarps." + name + ".pitch"));
+				Location loc = configs.getLocations().getLocation("PlayerWarps." + name + ".Location");
 				ItemStack displayItem[] = itemStackArrayFromBase64(configs.getLocations().getString("PlayerWarps." + name + ".displayitem"));
 				OfflinePlayer owner = Bukkit.getOfflinePlayer(configs.getLocations().getString("PlayerWarps." + name + ".owner"));
 				playerwarps.add(new DestiPlayerWarp(owner, name, loc, displayItem[0]));
@@ -237,40 +207,18 @@ public class DestiServer implements Listener {
 	public DestiPlayer getDestiPlayer(Player p) {return onlineplayers.get(p);}
 	
 	public void setSpawn(Location loc) {
-		String world = loc.getWorld().getName();
-		int x = loc.getBlockX();
-		int y = loc.getBlockY();
-		int z = loc.getBlockZ();
-		float yaw = loc.getYaw();
-		float pitch = loc.getPitch();
-		configs.getLocations().set("SpawnLocation.world", world);
-		configs.getLocations().set("SpawnLocation.x", x);
-		configs.getLocations().set("SpawnLocation.y", y);
-		configs.getLocations().set("SpawnLocation.z", z);
-		configs.getLocations().set("SpawnLocation.yaw", yaw);
-		configs.getLocations().set("SpawnLocation.pitch", pitch);
+		configs.getLocations().set("SpawnLocation", loc);
 		configs.saveLocations();
 		configs.reloadLocations();
 		spawn = loc;
 	}
 	public Location getSpawn() {return spawn;}
 	public void setWarp(String name, Location loc, ItemStack displayItem) {
-		String world = loc.getWorld().getName();
-		int x = loc.getBlockX();
-		int y = loc.getBlockY();
-		int z = loc.getBlockZ();
-		float yaw = loc.getYaw();
-		float pitch = loc.getPitch();
 		ArrayList<ItemStack> array = new ArrayList<ItemStack>();
 		array.add(displayItem);
 		ItemStack[] is = array.toArray(new ItemStack[0]);
 		configs.getLocations().set("Warps." + name + ".displayitem", itemStackArrayToBase64(is));
-		configs.getLocations().set("Warps." + name + ".world", world);
-		configs.getLocations().set("Warps." + name + ".x", x);
-		configs.getLocations().set("Warps." + name + ".y", y);
-		configs.getLocations().set("Warps." + name + ".z", z);
-		configs.getLocations().set("Warps." + name + ".yaw", yaw);
-		configs.getLocations().set("Warps." + name + ".pitch", pitch);
+		configs.getLocations().set("Warps." + name + ".Location", loc);
 		configs.saveLocations();
 		configs.reloadLocations();
 		warps.add(new DestiWarp(name, loc, displayItem));
@@ -325,27 +273,13 @@ public class DestiServer implements Listener {
 		return warpget;
 	}
 	
-	
-	
-	
 	public void setPlayerWarp(Player owner, String name, Location loc, ItemStack displayItem) {
-		String world = loc.getWorld().getName();
-		int x = loc.getBlockX();
-		int y = loc.getBlockY();
-		int z = loc.getBlockZ();
-		float yaw = loc.getYaw();
-		float pitch = loc.getPitch();
 		ArrayList<ItemStack> array = new ArrayList<ItemStack>();
 		array.add(displayItem);
 		ItemStack[] is = array.toArray(new ItemStack[0]);
 		configs.getLocations().set("PlayerWarps." + name + ".owner", owner.getUniqueId().toString());
 		configs.getLocations().set("PlayerWarps." + name + ".displayitem", itemStackArrayToBase64(is));
-		configs.getLocations().set("PlayerWarps." + name + ".world", world);
-		configs.getLocations().set("PlayerWarps." + name + ".x", x);
-		configs.getLocations().set("PlayerWarps." + name + ".y", y);
-		configs.getLocations().set("PlayerWarps." + name + ".z", z);
-		configs.getLocations().set("PlayerWarps." + name + ".yaw", yaw);
-		configs.getLocations().set("PlayerWarps." + name + ".pitch", pitch);
+		configs.getLocations().set("PlayerWarps." + name + ".Location", loc);
 		configs.saveLocations();
 		configs.reloadLocations();
 		playerwarps.add(new DestiPlayerWarp(owner, name, loc, displayItem));
@@ -413,14 +347,6 @@ public class DestiServer implements Listener {
 	
 	public void createKit(String name, Inventory inv, int cooldown) {
 		kits.add(new DestiKit(name, inv.getContents(), cooldown));
-//		for (ItemStack item : inv.getContents()) {
-//			configs.getKits().set("kits." + name + "." + item.getType().toString().toUpperCase() + ".amount", item.getAmount());
-//			configs.getKits().set("kits." + name + "." + item.getType().toString().toUpperCase() + ".displayname", item.getItemMeta().getDisplayName());
-//			configs.getKits().set("kits." + name + "." + item.getType().toString().toUpperCase() + ".lore", item.getLore());
-//			item.getEnchantments().keySet().forEach(enchant -> {
-//				configs.getKits().set("kits." + name + "." + item.getType().toString().toUpperCase() + ".enchants." + enchant.getName(), item.getEnchantmentLevel(enchant));
-//			});
-//		}
 	}
 	public boolean deleteKit(String name) {
 		DestiKit kit = null;
@@ -611,7 +537,7 @@ public class DestiServer implements Listener {
 	    		@Override
 	    		public void run() {
 	    	         try {
-	    	        	 URL url = new URL("https://api.covid19api.com/summary");
+	    	        	 URL url = new URL("https://api.mojang.com/user/profiles/" + uuid.replaceAll("-", "") + "/names");
 
 	    	        	 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	    	        	 conn.setRequestMethod("GET");

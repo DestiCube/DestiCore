@@ -11,7 +11,7 @@ public class config {
 	    
 		public static Integer GENERAL_TELEPORT_WARMUP, GENERAL_JUMP_DISTANCE, WARPMENU_SIZE;
 		public static String GENERAL_SPAWN_WORLD, GENERAL_BROADCAST_FORMAT, GENERAL_MESSAGE_SENT_FORMAT, GENERAL_MESSAGE_RECIEVED_FORMAT, GENERAL_SOCIAL_SPY_FORMAT,
-								WARPMENU_TITLE;
+								WARPMENU_TITLE, STARTERKIT;
 		public static Double GENERAL_NEAR_RADIUS, PLAYERWARP_COST;
 		public static HashMap<String, List<String>> LIST_PLACEHOLDERS;
 		public static List<String> LIST_FORMAT, ITEM_DB_FORMAT, ITEM_DB_FORMAT_FOR_TOOL, TPA_SENT_FORMAT, TPA_ACCEPTED_FORMAT, TPA_RECIEVED_FORMAT, 
@@ -43,6 +43,8 @@ public class config {
 			WARPMENU_ITEMS = getSection("WarpMenu.Items");
 			
 			PLAYERWARP_COST = getDouble("PlayerWarpCost");
+			
+			STARTERKIT = getString("StarterKit");
 		}
 		public String getString(String path) {return ConfigYAML.a().getConfig().getString(path);}
 		public List<String> getStringList(String path) {return ConfigYAML.a().getConfig().getStringList(path);}
